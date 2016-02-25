@@ -5,7 +5,11 @@ class Myprofile(db.Model):
     last_name = db.Column(db.String(80)) 
     nickname = db.Column(db.String(80), unique=True)    
     email = db.Column(db.String(120), index=True, unique=True)
- 
+    password = PasswordField('New Password', [
+        validators.Required(),
+        validators.EqualTo('confirm', message='Passwords must match')
+    ])
+    confirm = PasswordField('Repeat Password')
 
     
     def is_authenticated(self):
